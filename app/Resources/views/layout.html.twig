@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %} CSanteBlog - HAMDANE Mounir {% endblock %}</title>
+  <meta name="description" content="CSante est un blog qui contient les articles parlant de tout ce qui touche la sante tels que les maladies, les nouveaux médicaments, équipement médical  etc " />
+  <meta name="keywords" content="sante, maladie, médicament, equipement,développement" />
+  <meta name="author" content="HAMDANE Mounir" />
+    {% stylesheets
+        'css/bootstrap.css'
+        '@MounirBlogBundle/Resources/public/css/main.css'
+         filter='cssrewrite' output='css/main.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" media="screen" type="text/css"/>
+     {% endstylesheets %}
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{{path('Mounir_blog_home')}}"><img src="{{ asset('img/logo.png') }}" alt="Blog Sante" style="height : 50px ; width : 120px ;margin-top: -15px"></a>
+            </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="{{path('Mounir_blog_home')}}">Accueil <span class="sr-only">(current)</span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted('ROLE_ADMIN') %}
+                  <li class="active"><a href="{{path('Mounir_blog_admin')}}">Espace Admin <span class="sr-only">(current)</span></a></li>
+                  <li><a href="{{path('fos_user_security_logout')}}">Se deconnecter</a></li>
+                {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <header id="img_header"></header>
+      <div id="corps_body">
+        <div  class="container">
+          <div class="row">
+            <section id="content" class="col-md-9">
+              {% block body %}
+              {% endblock %}
+            </section>
+            <aside  class="col-md-3">
+              <section id="a_propos_moi">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h4 class="panel-title text-center">A propos de moi</h4>
+                  </div>
+                  <div class="panel-body">
+                    <ul id="proposlist">
+                      <li><strong>HAMDANE Mounir</strong> </li>
+                      <li><strong>Profession</strong>: Etudiant Master 2 </li>
+                      <li><strong>Spécialité</strong>: Informatique(DECOL)</li>
+                      <li><strong>Université </strong>: Montpellier II</li>
+                      <li><strong>Ville </strong>: Montpellier</li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+              <section id="categorie">
+                {{ render(controller("MounirBlogBundle:CrudBlog:ListCategorie")) }}
+              </section>
+            </aside>
+          </div>
+        </div>
+      </div>
+    <footer class="col-md-12 text-center">
+      <img src="{{ asset('img/logo2.png') }}" alt="Blog Sante" style="height : 50px ; width : 120px ;margin-top: 15px ; margin-bottom:15px">
+      <p>Copyright © {{ 'now'|date('Y') }} www.csante.com</p>
+    </footer>
+{% javascripts
+    'js/jquery.min.js'
+    'bundles/Mounirblog/ckeditor/ckeditor.js'
+    'js/bootstrap.min.js'
+    '@MounirBlogBundle/Resources/public/js/*'
+     output='js/app.js' %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+  </body>
+</html>

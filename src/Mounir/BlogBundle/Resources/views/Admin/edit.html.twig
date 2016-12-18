@@ -1,0 +1,21 @@
+
+{% extends "MounirBlogBundle::layoutAdmin.html.twig" %}
+
+{% block title %}
+  Modifier un article - {{ parent() }}
+{% endblock %}
+
+{% block admin_body %}
+
+    <p>
+      <a href="{{ path('Mounir_blog_view', {'slug': article.slug}) }}" class="btn  btn-success">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Retour à l'article
+      </a>
+    </p>
+
+  <h3 style="text-align: center">Modifier un article</h3>
+
+  {{ include("MounirBlogBundle:Admin:formedit.html.twig") }}
+
+{% endblock %}

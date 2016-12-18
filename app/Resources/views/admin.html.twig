@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %} Espace Admin {% endblock %}</title>
+
+
+    {% stylesheets
+        'css/bootstrap.css'
+        '@MounirBlogBundle/Resources/public/css/main.css'
+        filter='cssrewrite' output='css/main.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" media="screen" type="text/css"/>
+     {% endstylesheets %}
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{{path('Mounir_blog_home')}}"><img src="{{ asset('img/logo.png') }}" alt="logo csante" style="height : 50px ; width : 120px ;margin-top: -15px"></a>
+            </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted('ROLE_ADMIN') %}
+                  <li class="active"><a href="{{path('Mounir_blog_admin')}}">Espace Admin <span class="sr-only">(current)</span></a></li>
+                  <li><a href="{{path('fos_user_security_logout')}}">Se deconnecter</a></li>
+                {% endif %}
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+
+    <div id="corps_body">
+      <div  class="container">
+        <div class="row">
+          <section id="content" class="col-md-12">
+            {% block body %}
+            {% endblock %}
+          </section>
+        </div>
+      </div>
+    </div>
+  <footer class="col-md-12 text-center">
+      <img src="{{ asset('img/logo2.png') }}" alt="logo csante" style="height : 50px ; width : 120px ;margin-top: 15px ; margin-bottom:15px"></a>
+      <p>Copyright © {{ 'now'|date('Y') }} www.csante.com</p>
+  </footer>
+
+
+
+
+{% javascripts
+    'js/jquery.min.js'
+    'bundles/Mounirblog/ckeditor/ckeditor.js'
+    'js/bootstrap.min.js'
+    '@MounirBlogBundle/Resources/public/js/*'
+     output='js/app.js' %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+</body>
+</html>

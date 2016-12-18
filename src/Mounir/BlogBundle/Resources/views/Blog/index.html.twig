@@ -1,0 +1,46 @@
+{% extends "MounirBlogBundle::layout.html.twig" %}
+{% block title %}
+ Accueil - {{ parent() }}
+{% endblock %}
+
+{% block  CSanteBlog_body %}
+
+{% for row in listArticles|batch(3) %}
+    <div class="row">
+      {% for article in row %}
+        <article class="col-md-4 content">
+          <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                  <img class="img_article col-md-12" src="{{ asset('uploads/images/' ~ article.image) }}" alt="article_img">
+                </div>
+                <div class="row">
+                  <h3 class="titre_article"><a href="{{ path('Mounir_blog_view', {'slug':article.slug}) }}" class="col-md-12">{{ article.titre }}</a></h3>
+                </div>
+                <div class="row">
+                  <p class="col-md-12">
+                    {{article.contenu|markdown|striptags|slice(0, 150)|raw }} ...
+                    <br>
+                    <br>
+                    <a href="{{ path('Mounir_blog_view', {'slug':article.slug}) }}" class="btn btn-primary">Lire la suite &nbsp;&nbsp;<i class="glyphicon glyphicon-triangle-right"></i></a>
+                  </p>
+               </div>
+             </div>
+             <div class="panel-footer">
+                <p class="info_post">
+                   <span class="dateCreation_post"><i class="glyphicon glyphicon-calendar"></i> Le {{ article.date|date('d/m/Y') }}</span><br>
+                   <span class="auteur_post"><i class="glyphicon glyphicon-user"></i> Mounir HAMDANE </span><br>
+                   <span class="categorie_auteur"><i class="glyphicon glyphicon-th"></i> {{article.categorie.nom}} </span>
+                </p>
+            </div>
+          </div>
+       </article>
+    {% endfor %}
+    </div>
+{% endfor %}
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6  col-md-offset-3 ">
+          {{ knp_pagination_render(listArticles) }}
+    </div>
+  </div>
+{% endblock %}

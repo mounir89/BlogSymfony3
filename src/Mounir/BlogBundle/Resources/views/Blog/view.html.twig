@@ -1,0 +1,34 @@
+
+
+{% extends "MounirBlogBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ article.titre }}- {{parent()}}
+{% endblock %}
+{% block CSanteBlog_body %}
+   <nav>
+      <p>
+        <a href="{{ path('Mounir_blog_home') }}" class="btn btn-success" style="margin-top: 10px">
+          <i class="glyphicon glyphicon-chevron-left"></i>
+          Retour à la liste d'articles
+        </a>
+      </p>
+    </nav>
+    <article>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <header>
+            <h1 class="title_article">{{ article.titre }}</h1>
+            <p class="info_article">
+              <span class="date_article">Le {{ article.date|date('d/m/Y') }}</span>
+              <span class="auteur_article">//par Mounir HAMDANE</span>
+              <span class="categorie_article">// {{ article.categorie.nom}}</span>
+            </p>
+         </header>
+          <div class="article_contenu">
+            {{ article.contenu|markdown}}
+          </div>
+        </div>
+      </div>
+    </article>
+{% endblock %}

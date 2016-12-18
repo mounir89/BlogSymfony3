@@ -1,0 +1,30 @@
+Mounir_blog_home:
+    path:      /
+    defaults:
+        _controller: MounirBlogBundle:Blog:index
+
+
+Mounir_blog_view:
+    path:      /article/{slug}
+    defaults:
+        _controller: MounirBlogBundle:Blog:view
+
+Mounir_blog_admin:
+    path:      /admin
+    defaults:
+        _controller: MounirBlogBundle:CrudBlog:admin
+
+Mounir_blog_add:
+    path:      /admin/add
+    defaults:
+        _controller: MounirBlogBundle:CrudBlog:add
+
+Mounir_blog_edit:
+    path:      /admin/edit/{slug}
+    defaults:
+        _controller: MounirBlogBundle:CrudBlog:edit
+
+Mounir_blog_delete:
+    path:      /admin/delete/{slug}
+    defaults:
+        _controller: MounirBlogBundle:CrudBlog:delete

@@ -1,0 +1,14 @@
+
+{% extends "MounirBlogBundle::layoutAdmin.html.twig" %}
+
+{% block title %}
+  Ajouter un article - {{ parent() }}
+{% endblock %}
+
+{% block admin_body %}
+
+    <h3 style="text-align: center">Ajouter un article</h3>
+
+    {{ include("MounirBlogBundle:Admin:form.html.twig") }}
+
+{% endblock %}
